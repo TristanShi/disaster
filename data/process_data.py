@@ -2,11 +2,10 @@
 # -*- coding:utf-8 _*-
 """
 @Author: Tristan SHI
-@Email: shizhendong@unionpayintl.com
+@Email: tristanshi1993@gmail.com
 
 @File: process_data.py
 @Time: 2020/4/22 14:56
-@Motto：也许这就是人生吧
 """
 
 import sys

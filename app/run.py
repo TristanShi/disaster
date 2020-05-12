@@ -25,10 +25,12 @@ def tokenize(text):
 
     return clean_tokens
 
+
 # load data
 database_filepath = 'DisasterData'
 engine = create_engine('sqlite:////home/workspace/data/DisasterMessages.db')
 df = pd.read_sql_table(database_filepath, engine)
+
 
 # load model
 model = joblib.load("/home/workspace/models/disasterClf.pickle")
