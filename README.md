@@ -76,8 +76,10 @@ D:\WORKSPACE
         python models/train_classifier.py data/disasterMessage.db models/disasterClf.pickle
 		```
 2. Run your web app with the following command in the app's directory.
+```
+python app/run.py
+```
 
-	python app/run.py
 
 3. Go to http://127.0.0.1:3001/
 
