@@ -8,7 +8,6 @@ Udacity Data Scientist Nanodegree - Term 2 - Project 1 - Disaster Response Pipel
 1. [Project Overview](#ProjectOverview)
 2. [Project Components](#ProjectComponents)
 3. [File Description](#FileDescription)
-4. [Requirements](#Requirements)
 5. [Instructions](#Instructions)
 
 ## 1. <a name="ProjectOverview">Project Overview </a>
@@ -64,14 +63,8 @@ D:\WORKSPACE
 - ML Pipeline Preparation-zh.ipynb # notebook to train classifier
 - README.md
 
-## 4. <a name="Requirements">Requirements </a>    
+## 4. <a name="Instructions">Instructions </a>
 
-All of the requirements are captured in requirements.txt.  
-```python
-pip install -r requirements.txt
-```
-
-## 5. <a name="Instructions">Instructions </a>
 1. Run the following commands in the project's root directory to process data and train model.
 
     - Run the ETL pipeline to clean data and store it in a SQLite database
