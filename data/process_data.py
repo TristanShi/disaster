@@ -2,7 +2,7 @@
 # -*- coding:utf-8 _*-
 """
 @Author: Tristan SHI
-@Email: tristanshi1993@gmail.com
+@Email: shizhendong@unionpayintl.com
 
 @File: process_data.py
 @Time: 2020/4/22 14:56
@@ -17,15 +17,22 @@ import numpy as np
 def load_data(messages_filepath: str, categories_filepath: str)->pd.DataFrame:
     """
     load the dataset 
-    :param messages_filepath:
-    :param categories_filepath:
-    :return:  df
+    :param messages_filepath:  The file path of the messages csv
+    :param categories_filepath:  The file path of the categories cv
+    :return df: Merged messages and categories df, merged on ID  
     """
-    # load messages dataset
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
-    df = messages.merge(categories, on=['id'])
+    df = messages.merge(categories, how='outer', on=['id'])
 
+    return df
+
+
+def clean_data(df:pd.DataFrame)->pd.DataFrame:
+    """Clean the data
+    :param df: combined messages and categories dataframe
+    :return df: cleaned dataframe    
+    """
     # create a dataframe of the 36 individual category columns
     categories = pd.DataFrame(np.array([val.split(';') for i, val in df['categories'].iteritems()]),
                               columns=['categories_%s' % str(i) for i in range(36)])
@@ -51,13 +58,16 @@ def load_data(messages_filepath: str, categories_filepath: str)->pd.DataFrame:
 
     # concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories], axis=1)
+    
+    
+    # "related" column has 0, 1, 2 values
+    # change 2 to 1, so that the value is only 1 or 0
+    df['related'] = df['related'].map(lambda x: 1 if x == 2 else x)
 
-    return df
-
-
-def clean_data(df:pd.DataFrame)->pd.DataFrame:
+   
     # drop duplicates
     df.drop_duplicates(inplace=True)
+    
     return df
 
 
@@ -68,8 +78,8 @@ def save_data(df:pd.DataFrame, database_filename:str):
     :param database_filename
     :return 
     """
-    engine = create_engine('sqlite:////home/workspace/data/DisasterMessages.db')
-    df.to_sql(database_filename, engine, index=False)
+    engine = create_engine('sqlite:///' + database_filename)
+    df.to_sql('message', engine, index=False)
     return True
 
 
