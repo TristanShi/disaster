@@ -84,6 +84,13 @@ def build_model() ->sklearn.pipeline.Pipeline:
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
+    parameters = [
+        {"clf": [RandomForestClassifier()],
+         "clf__n_estimators": [10, 100, 250],
+         "clf__max_depth":[8],
+         "clf__random_state":[42]
+        }]
+    model = GridSearchCV(model, param_grid=parameters, return_train_score=True,scoring='f1_micro')   
     return model
 
 
